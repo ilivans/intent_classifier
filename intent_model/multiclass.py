@@ -279,7 +279,7 @@ class KerasMulticlassModel(object):
         output = Dense(self.n_classes, activation=None,
                        kernel_regularizer=l2(params['coef_reg_den']))(output)
         output = BatchNormalization()(output)
-        act_output = Activation('sigmoid')(output)
+        act_output = Activation('softmax')(output)
         model = Model(inputs=inp, outputs=act_output)
         return model
 
@@ -501,7 +501,7 @@ class KerasMulticlassModel(object):
         # print("[ saving intent_model: {} ]".format(str(opt_path)))
         self.model.save_weights(weights_path)
 
-        with open(opt_path, 'w') as outfile:
+        with open(str(opt_path), 'w') as outfile:
 
             json.dump(self.opt, outfile)
 

@@ -94,7 +94,8 @@ class Dataset(object):
             self.data[splitted_fields[i]], data_to_div = train_test_split(data_to_div,
                                                                           test_size=
                                                                           len(data_to_div) -
-                                                                          int(data_size * splitting_proportions[i]))
+                                                                          int(data_size * splitting_proportions[i]),
+                                                                          stratify=[i[1][0] for i in data_to_div])
         self.data[splitted_fields[-1]] = data_to_div
         return True
 

@@ -95,12 +95,14 @@ class EmbeddingInferableModel(object):
             except Exception as e:
                 raise RuntimeError('Looks like the `EMBEDDINGS_URL` variable is set incorrectly', e)
 
-        if self.module == "fastText":
-            import fastText
-            self.fasttext_model = fastText.load_model(fasttext_model_file)
-        if self.module == "fasttext":
-            import fasttext
-            self.fasttext_model = fasttext.load_model(fasttext_model_file)
+        # if self.module == "fastText":
+        #     import fastText
+        #     self.fasttext_model = fastText.load_model(fasttext_model_file)
+        # if self.module == "fasttext":
+        #     import fasttext
+        #     self.fasttext_model = fasttext.load_model(fasttext_model_file)
+        self.fasttext_model = np.load(fasttext_model_file, encoding='latin1')[()]
+
         return
 
     def infer(self, instance, *args, **kwargs):
